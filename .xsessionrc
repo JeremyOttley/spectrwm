@@ -1,1 +1,3 @@
 xrandr --dpi 120
+xset s off -dpms
+xset r rate 250 45
