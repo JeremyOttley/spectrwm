@@ -20,6 +20,10 @@ set completion-ignore-case On
 "\e[2~": quoted-insert
 
 # Allow non-ASCII input
+set meta-flag on
 set input-meta on
 set output-meta on
 set convert-meta off
+
+"\C-w": backward-kill-word
+"\C-o": rlwrap-call-editor
