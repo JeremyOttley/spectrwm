@@ -49,6 +49,8 @@ tmux
 redshift
 dunst
 feh
+clojure
+leiningen
 )
 
 # You know the thing
