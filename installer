@@ -1,0 +1,85 @@
+#!/bin/sh
+# o┏┓┓┓━┓┏┓┓┳━┓┳  ┳  ┳━┓┳━┓
+# ┃┃┃┃┗━┓ ┃ ┃━┫┃  ┃  ┣━ ┃┳┛
+# ┇┇┗┛━━┛ ┇ ┛ ┇┇━┛┇━┛┻━┛┇┗┛
+# Install everything I need!
+
+######
+# Tools #
+######
+#####################################################
+
+# Set Colors
+
+bold=$(tput bold)
+underline=$(tput sgr 0 1)
+reset=$(tput sgr0)
+
+purple=$(tput setaf 171)
+red=$(tput setaf 1)
+green=$(tput setaf 76)
+tan=$(tput setaf 3)
+blue=$(tput setaf 38)
+
+# Headers and  Logging
+
+e_header() { printf "\n${bold}${purple}==========  %s  ==========${reset}\n" "$@"
+}
+e_arrow() { printf "➜ $@\n"
+}
+e_success() { printf "${green}✔ %s${reset}\n" "$@"
+}
+e_error() { printf "${red}✖ %s${reset}\n" "$@"
+}
+e_warning() { printf "${tan}➜ %s${reset}\n" "$@"
+}
+e_underline() { printf "${underline}${bold}%s${reset}\n" "$@"
+}
+e_bold() { printf "${bold}%s${reset}\n" "$@"
+}
+e_note() { printf "${underline}${bold}${blue}Note:${reset}  ${blue}%s${reset}\n" "$@"
+}
+
+############################################################
+
+# Packages for the new installation
+pkgs=(spectrwm-git
+xterm
+tmux
+redshift
+dunst
+feh
+)
+
+# You know the thing
+e_header "Let's update and install some packages!"
+trizen -Syu --noconfirm ${pkgs[@]}
+
+# Update fonts
+e_success "Updating fonts"
+git clone https://github.com/jeremyottley/.fonts ~/.fonts
+sudo fc-cache -v
+
+# Fancy
+e_underline "Some fancy terminal sugar"
+curl -sLf https://spacevim.org/install.sh | bash
+curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh
+cd ~
+git clone https://github.com/nojhan/liquidprompt.git
+source liquidprompt/liquidprompt
+
+# Git stuff
+e_arrow "Loading stuff to make Git easier to use"
+git config --global user.name "jeremyottley"
+git config --global user.email "jeremy.ottley@gmail.com"
+git config --global core.autocrlf input
+git config --global core.safecrlf true
+
+e_warning "Moving dotfiles!"
+mv -vf ~/spectrwm/.* ~/
+mv -vf ~/spectrwm/* ~/
+
+# Print something useful
+e_bold "Finally finished."
+e_bold "Please double check your dotfiles."
+e_header "And don't forget to have fun!"
