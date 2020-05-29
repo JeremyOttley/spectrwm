@@ -51,6 +51,7 @@ dunst
 feh
 clojure
 leiningen
+xwinrap-git
 )
 
 # You know the thing
