@@ -8,6 +8,7 @@ alias xclip="xclip -selection c"
 alias cb="xclip -selection c"
 alias lumo="lumo -e \"(require '[lumo.io :refer [slurp spit]])\" -r"
 
+e () { emacs "$@" & disown; }
 
 # Create a new directory and enter it
 function md() {
